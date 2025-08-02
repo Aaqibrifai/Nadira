@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To Nadira, With Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to top right, #ffe6eb, #fff1f7);
+      color: #333;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .section {
+      min-height: 100vh;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5em;
+      color: #c2185b;
+      text-shadow: 0 0 15px rgba(255, 192, 203, 0.7);
+      margin-bottom: 25px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff9aa2; }
+      to { text-shadow: 0 0 20px #f06292; }
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(5px);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      line-height: 1.7em;
+    }
+
+    img.card {
+      max-width: 85%;
+      margin: 25px 0;
+      height: 350px;
+      border-radius: 15px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s;
+    }
+
+    img.card:hover {
+      transform: scale(1.05);
+    }
+
+    .fadeIn {
+      animation: fadeInUp 1.8s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ending {
+      background: linear-gradient(to top, #fff0f5, #ffe6eb);
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: floatUp 10s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .final-blink {
+      font-size: 1.4em;
+      color: #d81b60;
+      margin-top: 40px;
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .button-section {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .yes-btn, .no-btn {
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .yes-btn {
+      background-color: #a29bfe;
+      color: white;
+    }
+    .yes-btn:hover {
+      background-color: #6c5ce7;
+    }
+
+    .no-btn {
+      background-color: white;
+      color: #d63031;
+      border: 1px solid #d63031;
+    }
+    .no-btn:hover {
+      background-color: #ffe6e6;
+    }
+
+    #response {
+      margin-top: 25px;
+      font-size: 1.1em;
+      color: #00b894;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts">
+    <script>
+      for (let i = 0; i < 35; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (6 + Math.random() * 5) + 's';
+        heart.style.opacity = Math.random();
+        heart.style.width = heart.style.height = (12 + Math.random() * 15) + 'px';
+        document.querySelector('.hearts').appendChild(heart);
+      }
+    </script>
+  </div>
+
+  <div class="section fadeIn">
+    <h1>To my chella thangachiiii</h1>
+    <p>
+      Assalamu Alaikum Nadira… 🌙<br><br>
+      This small website is just a humble gift to say <strong>Happy Birthday</strong> to someone who means more to me than words ever could.<br><br>
+      You once gave me something truly special — a moment, a memory I’ll never forget. And today, I wanted to give you something back — from my heart. 💌<br><br>
+      No matter what life brings, I believe — insha’Allah, we’ll be happy together one day. Allah will make a way. That’s a promise I hold onto, from deep in my heart. 🤍✨<br><br>
+      One day, when I get a good job, I’ll speak to your wappa — with honesty, with love, and with full hope. 🕊️💌 Insha’Allah.🕊️<br><br>
+      Nadira, tell me truly… Do you wish — insha’Allah — to be with me, not just in this life, but in Jannah too? To walk together through every qadr — every test and blessing — hand in hand, with sabr and shukr, until our last breath… and beyond? 🤍
+    </p>
+
+    <div class="button-section">
+      <button class="yes-btn" onclick="showYesMessage()">🤍 Yes, Insha’Allah</button>
+      <button class="no-btn" onclick="showNoMessage()">No 🥲</button>
+    </div>
+    <div id="response"></div>
+  </div>
+
+  <div class="section fadeIn">
+    <h1>The Gift You Gave Me 🎁</h1>
+    <img src="https://i.ibb.co/0pv8cZfC/photo-2025-07-24-00-51-10.jpg" alt="Card Inside" class="card">
+    <img src="https://i.ibb.co/HLrjXSWs/IMG-5777.jpg" alt="Card Front" class="card">
+    <img src="https://i.ibb.co/N6zRnHtV/IMG-5790.jpg" alt="Card Inside" class="card">
+    <p>
+      It wasn’t just a gift — it was a <strong>piece of your soul wrapped in paper</strong>. 🌸<br>
+      Every word felt like a dua, every line felt like a silent prayer just for me. 💌<br>
+      That day, your effort became my forever memory. <strong>May Allah bless the hands that wrote it.</strong>
+    </p>
+  </div>
+
+  <div class="section fadeIn">
+    <h1>My Heartfelt Reply 💬</h1>
+    <p>
+      You didn’t just write — you poured your heart into every word, like a poet with a soul full of love. 🌸<br>
+      That card… those lines… they weren’t just ink on paper — they were you. And they’re now a part of me forever. 💌<br><br>
+      Nadira, your love is something rare — gentle, pure, and sincere. I promise to hold it safely, always. 🫶<br><br>
+      On your birthday, I just want you to know — I’m grateful to Allah for someone like you in my life. The effort you took, the prayers you made, every little word… felt like a hug from Jannah. ✨<br><br>
+      You once said, <em>“InshaAllah, Allah will bring us both together in the future happily”</em> — and that line lives in my heart. I believe it. I hold on to it. And I say Ameen with all my soul. 🤍<br><br>
+      InshaAllah, we will live such a life that even this world will wonder how two hearts can be so happy together. <br>
+      I will watch you smile… not just with my eyes, but with my heart — and I’ll never let that smile fade, bi’idhnillah. 💫<br><br>
+      I’m not just saying this in words… I mean it with all of me. From my heart to yours — always. 💖
+    </p>
+  </div>
+
+  <div class="section fadeIn ending">
+    <h1>Forever, Insha Allah 🌙</h1>
+    <p>
+      One day, we’ll sit side by side… maybe holding hands, hearts full and quiet smiles on our faces.<br>
+      We’ll look back at this very moment — and softly whisper, “We made it.”<br><br>
+      Because what we share isn’t just love…<br>
+      It’s patience.<br>
+      It’s prayer.<br>
+      It’s dua wrapped in hope. ❤️<br><br>
+      And I believe — with all of me — that Allah is writing something beautiful for us.<br><br>
+      Once again... <strong>Barakallahu fi umrik, Nadira.</strong><br>
+      May Allah bless your life with peace, love, and endless barakah. 🎉✨
+    </p>
+    <div class="final-blink">~ Yours, thambi :) ✨</div>
+  </div>
+
+  <script>
+    function showYesMessage() {
+      document.getElementById('response').innerHTML = "💌 You said yes… and my heart just made sujood. May Allah write us together in both worlds, Nadira. Ameen 🤍";
+    }
+
+    function showNoMessage() {
+      document.getElementById('response').innerHTML = ".......... Indha aasai laam epo vandhichu pillai ku adipe paaru unna confirm 🥲😅😂";
+    }
+  </script>
+</body>
+</html>
