@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Every Picture of You ❤️</title>
+
+<style>
+/* ---------- Base ---------- */
+:root{
+  --bg:#ffdde1;
+  --primary:#b3003b;
+  --primary-2:#ff4d6d;
+  --ink:#333;
+  --soft:#ffffffcc;
+  --shadow:0 8px 24px rgba(0,0,0,.18);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Segoe UI Emoji',sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  overflow-x:hidden;
+}
+
+/* ---------- Floating Hearts (bottom → top) ---------- */
+@keyframes floatUp{
+  0%{transform:translateY(100vh) scale(.6) rotate(45deg);opacity:.85}
+  100%{transform:translateY(-10vh) scale(1) rotate(45deg);opacity:0}
+}
+.heart{
+  position:fixed; bottom:-40px; left:0;
+  width:18px; height:18px;
+  background:red; transform:rotate(45deg);
+  border-radius:2px; z-index:0; opacity:.8;
+  animation:floatUp linear infinite;
+  filter:drop-shadow(0 6px 12px rgba(0,0,0,.25));
+}
+.heart::before,.heart::after{
+  content:""; position:absolute; width:18px; height:18px; background:inherit; border-radius:50%;
+}
+.heart::before{left:-50%; top:0}
+.heart::after{left:0; top:-50%}
+
+/* ---------- Header ---------- */
+.header{
+  position:relative; z-index:2; text-align:center; padding:28px 16px 8px;
+}
+.title {
+  margin:0 0 6px;
+  font-family:"Brush Script MT",cursive;
+  font-size:clamp(32px,6vw,56px);
+  color:var(--primary);
+  text-shadow:
+    0 0 6px #ff4d6d,
+    0 0 12px #ff4d6d,
+    0 0 18px #ff4d6d,
+    0 0 24px #ff4d6d;
+}
+
+.subtitle {
+  margin:0;
+  font-size:clamp(14px,2.6vw,18px);
+  color:#444;
+  text-shadow:
+    0 0 4px #ff9999,
+    0 0 8px #ff9999;
+}
+
+
+/* ---------- Gallery Grid (masonry feel) ---------- */
+.gallery{
+  position:relative; z-index:2; padding:18px 10px 8px; max-width:1200px; margin:0 auto;
+}
+.grid{
+  columns:5 260px;           /* masonry columns; auto wraps */
+  column-gap:14px;
+}
+@media (max-width:1100px){ .grid{ columns:4 220px } }
+@media (max-width:800px) { .grid{ columns:3 200px } }
+@media (max-width:560px) { .grid{ columns:2 160px } }
+.card{
+  break-inside:avoid; display:block; margin:0 0 14px; position:relative;
+  border-radius:14px; overflow:hidden; box-shadow:var(--shadow); cursor:pointer; background:#eee;
+  transform:translateZ(0);   /* enable GPU smoothing */
+}
+.thumb{
+  display:block; width:100%; height:auto; aspect-ratio:3/4; object-fit:cover;
+  filter:blur(22px) brightness(.7); /* hide outside preview */
+  transition:transform .25s ease, filter .25s ease;
+  will-change:transform;
+}
+.card:hover .thumb{ transform:scale(1.03) }
+
+/* lock/heart overlay on thumbs */
+.card::after{
+  content:"❤"; position:absolute; inset:auto 0 10px 0;
+  margin:auto; width:48px; height:48px; line-height:48px; text-align:center;
+  font-size:22px; color:#fff; background:rgba(0,0,0,.35);
+  border-radius:50%; backdrop-filter:blur(4px);
+  opacity:.9; transform:translateY(6px); transition:opacity .2s, transform .2s;
+}
+.card:active::after, .card:hover::after{ opacity:1; transform:translateY(0) }
+
+/* ---------- Lightbox ---------- */
+.lightbox{
+  position:fixed; inset:0; display:none; z-index:999; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.88); padding:10px;
+}
+.lightbox.open{ display:flex }
+.lb-inner{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center }
+.lb-img{
+  max-width:92vw; max-height:84vh; border-radius:14px; box-shadow:0 0 40px rgba(255,255,255,.75);
+  user-select:none; -webkit-user-drag:none;
+}
+.lb-counter{
+  position:absolute; top:14px; left:50%; transform:translateX(-50%);
+  color:#fff; font-weight:600; font-size:14px; letter-spacing:.6px; background:rgba(0,0,0,.35);
+  padding:6px 10px; border-radius:999px;
+}
+.btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  border:none; cursor:pointer; border-radius:50%;
+  width:44px; height:44px; font-size:22px; color:#fff;
+  background:rgba(0,0,0,.45); display:grid; place-items:center;
+  transition:background .2s, transform .12s;
+  user-select:none;
+}
+.btn:hover{ background:rgba(0,0,0,.65) }
+.btn:active{ transform:translateY(-50%) scale(.95) }
+.btn-prev{ left:10px }
+.btn-next{ right:10px }
+.btn-close{
+  top:12px; right:12px; transform:none; width:40px; height:40px; font-size:20px;
+}
+.btn-dl{
+  top:12px; right:58px; transform:none; width:40px; height:40px; font-size:18px;
+}
+
+/* ---------- Back to top ---------- */
+.to-top{
+  position:fixed; right:14px; bottom:14px; z-index:50;
+  border:none; width:44px; height:44px; border-radius:50%;
+  background:var(--primary); color:#fff; box-shadow:var(--shadow); cursor:pointer;
+  display:none;
+}
+.to-top.show{ display:block }
+.to-top:active{ transform:scale(.96) }
+
+/* ---------- Special Letters Section ---------- */
+.section{
+  position:relative; z-index:2; max-width:1100px; margin:40px auto 80px; padding:0 14px;
+}
+.section h2{
+  margin:16px 0 8px; text-align:center;
+  font-family:"Brush Script MT",cursive; font-size:clamp(28px,5vw,40px);
+  color:#800040; text-shadow:0 2px 0 #fff8;
+}
+.section p{ text-align:center; margin:0 0 18px; color:#444 }
+
+.letters{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+.polaroid{
+  background:#fff; border-radius:14px; padding:10px 10px 18px; box-shadow:var(--shadow);
+  transform:rotate(var(--tilt, -1deg)); transition:transform .25s ease;
+}
+.polaroid:hover{ transform:rotate(0deg) translateY(-2px) }
+.polaroid img{ width:100%; height:auto; display:block; border-radius:10px; }
+.caption{ text-align:center; margin-top:8px; font-weight:600; color:#7a0030 }
+
+/* ---------- Utility ---------- */
+.container{max-width:1200px; margin:0 auto}
+
+/* make sure tap gestures work nicely on mobile */
+@media (pointer:coarse){
+  .btn{ width:52px; height:52px; font-size:26px }
+  .btn-close,.btn-dl{ width:48px; height:48px; font-size:22px }
+}
+
+/* ---------- Small note ---------- */
+.footer-note{
+  text-align:center; color:#555; padding:20px 10px 50px; font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<!-- Floating hearts created via JS -->
+
+<header class="header">
+  <h1 class="title">Every Picture of You <span aria-hidden="true">❤️</span></h1>
+  <p class="subtitle">Because every single one of them is precious to me.</p>
+</header>
+
+<main class="gallery container">
+  <!-- Masonry grid of hidden thumbnails -->
+  <div id="grid" class="grid">
+
+    <!-- Replace these src values with your own links. 
+         Thumbnails are intentionally blurred; click to view clearly in lightbox. -->
+    <a class="card" href="https://i.ibb.co/Gf1WYxFx/Whats-App-Image-2025-08-02-at-17-11-23-577e409e.jpg">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/Gf1WYxFx/Whats-App-Image-2025-08-02-at-17-11-23-577e409e.jpg" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/YFV7GsNj/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/YFV7GsNj/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/C5qQYCyM/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/C5qQYCyM/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/v61mrrGP/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/v61mrrGP/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/JWvxHrTW/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/JWvxHrTW/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/99NGNP1k/Whats-App-Image-2025-08-15-at-14-48-08-117b7195.jpg">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/99NGNP1k/Whats-App-Image-2025-08-15-at-14-48-08-117b7195.jpg" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/VcGV7fK8/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/VcGV7fK8/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/ZRshqJKj/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/ZRshqJKj/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/zTcGTGgd/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/zTcGTGgd/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/XZJQL9K4/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/XZJQL9K4/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/TxnQs8p5/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/TxnQs8p5/image.png" alt="">
+    </a>
+    <a class="card" href="https://i.ibb.co/vxXDVH1n/image.png">
+      <img class="thumb" loading="lazy" src="https://i.ibb.co/vxXDVH1n/image.png" alt="">
+    </a>
+
+    <!-- You can keep adding more <a class="card"><img ...> blocks here -->
+  </div>
+</main>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <div class="lb-inner">
+    <button class="btn btn-close" id="btnClose" aria-label="Close">✕</button>
+    <button class="btn btn-dl" id="btnDl" aria-label="Download">⇩</button>
+    <button class="btn btn-prev" id="btnPrev" aria-label="Previous">‹</button>
+    <img id="lbImg" class="lb-img" src="" alt="">
+    <button class="btn btn-next" id="btnNext" aria-label="Next">›</button>
+    <div id="lbCounter" class="lb-counter">1 / 1</div>
+  </div>
+</div>
+
+<!-- Special Letters Section -->
+<section class="section container" id="letters">
+  <h2>Special for Me ❤️</h2>
+  <p>Handwritten words that I’ll keep safe forever.</p>
+
+  <div class="letters">
+    <figure class="polaroid"><img src="https://i.ibb.co/tPJZSk2d/image.png" alt="Note 1" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/R4PR00hx/image.png" alt="Note 2" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/d0sM3MLs/image.png" alt="Note 3" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/ZpP705L9/image.png" alt="Note 4" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/N2ngqHcG/image.png" alt="Note 5" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/PZJG1TG3/image.png" alt="Note 6" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/7xCPrjTV/image.png" alt="Note 7" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/MxgxSHf8/image.png" alt="Note 8" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/FLSPKcW4/image.png" alt="Note 9" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/fd5JgYL6/image.png" alt="Note 10" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/chsnRG3M/image.png" alt="Note 11" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/N2rH9MBN/image.png" alt="Note 12" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/13QpfnH/image.png" alt="Note 13" class="note-img" /></figure>
+  </div>
+</section>
+
+<!-- Popup (namespaced IDs) -->
+<div class="letters-popup" id="lettersPopup">
+  <button class="letters-close" id="lettersClose" aria-label="Close">&times;</button>
+  <div class="letters-counter" id="lettersCounter"></div>
+  <button class="letters-nav letters-prev" id="lettersPrev" aria-label="Previous">&#10094;</button>
+  <img id="lettersPopupImg" src="" alt="Letter">
+  <button class="letters-nav letters-next" id="lettersNext" aria-label="Next">&#10095;</button>
+</div>
+
+<style>
+  /* thumbnails */
+  #letters .letters{
+    display:flex; flex-wrap:wrap; gap:15px; justify-content:center;
+  }
+  #letters .letters img{
+    width:180px; height:220px; object-fit:cover; filter:blur(6px);
+    cursor:pointer; transition:.3s; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,.2);
+  }
+  #letters .letters img:hover{ filter:blur(3px); transform:scale(1.05); }
+
+  /* popup overlay */
+  .letters-popup{
+    position:fixed; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    background:rgba(0,0,0,.9); z-index:9999;
+    opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease;
+  }
+  .letters-popup.show{ opacity:1; visibility:visible; }
+
+  .letters-popup img{
+    max-width:90%; max-height:80%; border-radius:10px; box-shadow:0 0 20px rgba(255,255,255,.3);
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .letters-popup img.fade{ opacity:0; transform:scale(.96); }
+
+  .letters-close{
+    position:absolute; top:20px; right:30px; font-size:35px; color:#fff; background:transparent; border:0; cursor:pointer;
+  }
+  .letters-nav{
+    position:absolute; top:50%; transform:translateY(-50%); font-size:50px; color:#fff; background:rgba(0,0,0,.35);
+    border:0; cursor:pointer; user-select:none; padding:10px 14px; border-radius:50%;
+  }
+  .letters-nav:hover{ background:rgba(0,0,0,.55); }
+  .letters-prev{ left:20px; }
+  .letters-next{ right:20px; }
+
+  .letters-counter{
+    position:absolute; top:20px; left:50%; transform:translateX(-50%);
+    color:#fff; font-size:16px; background:rgba(0,0,0,.6); padding:6px 12px; border-radius:6px;
+  }
+
+  @media (max-width:600px){
+    #letters .letters img{ width:140px; height:180px; }
+    .letters-nav{ font-size:40px; }
+  }
+</style>
+
+<script>
+(() => {
+  // scope to this section to avoid clashes
+  const thumbs = document.querySelectorAll('#letters .note-img');
+  const popup = document.getElementById('lettersPopup');
+  const popupImg = document.getElementById('lettersPopupImg');
+  const counterEl = document.getElementById('lettersCounter');
+  const btnClose = document.getElementById('lettersClose');
+  const btnPrev = document.getElementById('lettersPrev');
+  const btnNext = document.getElementById('lettersNext');
+
+  let currentIndex = 0;
+
+  function updateCounter(){
+    counterEl.textContent = `${currentIndex + 1} / ${thumbs.length}`;
+  }
+
+  function openPopup(index){
+    currentIndex = index;
+    popupImg.src = thumbs[currentIndex].src;
+    updateCounter();
+    popup.classList.add('show');
+  }
+
+  function closePopup(){
+    popup.classList.remove('show');
+  }
+
+  function changeImage(dir){
+    popupImg.classList.add('fade');
+    setTimeout(() => {
+      currentIndex = (currentIndex + dir + thumbs.length) % thumbs.length;
+      popupImg.src = thumbs[currentIndex].src;
+      updateCounter();
+      popupImg.classList.remove('fade');
+    }, 160);
+  }
+
+  thumbs.forEach((img, i) => {
+    img.addEventListener('click', () => openPopup(i));
+  });
+
+  btnClose.addEventListener('click', (e) => { e.stopPropagation(); closePopup(); });
+  btnPrev.addEventListener('click', (e) => { e.stopPropagation(); changeImage(-1); });
+  btnNext.addEventListener('click', (e) => { e.stopPropagation(); changeImage(1); });
+
+  // click outside to close
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) closePopup();
+  });
+
+  // keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!popup.classList.contains('show')) return;
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'ArrowLeft')  changeImage(-1);
+    if (e.key === 'Escape')     closePopup();
+  });
+})();
+</script>
+
+
+<button id="toTop" class="to-top" aria-label="Back to top">↑</button>
+
+<p class="footer-note">InshaAllah, all these memories will only grow. 🤍</p>
+
+<script>
+/* ---------- Floating hearts generator ---------- */
+(function hearts(){
+  function spawn(){
+    const h=document.createElement('div');
+    h.className='heart';
+    const s=10+Math.random()*18;
+    h.style.width=s+'px'; h.style.height=s+'px';
+    h.style.left=Math.random()*100+'vw';
+    h.style.background=Math.random()>.5?'red':'#fff';
+    h.style.animationDuration=(4+Math.random()*6)+'s';
+    h.style.opacity=(.4+Math.random()*.6).toFixed(2);
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),10000);
+  }
+  setInterval(spawn,280);
+})();
+
+/* ---------- Lightbox logic with keyboard + swipe ---------- */
+const grid = document.getElementById('grid');
+const links = Array.from(grid.querySelectorAll('.card'));
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCounter = document.getElementById('lbCounter');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+const btnClose= document.getElementById('btnClose');
+const btnDl   = document.getElementById('btnDl');
+
+let index = 0;
+
+function openLB(i){
+  index = i;
+  const url = links[index].getAttribute('href');
+  lbImg.src = url;
+  lb.classList.add('open');
+  lb.setAttribute('aria-hidden','false');
+  updateCounter();
+  preloadNeighbors();
+}
+function closeLB(){
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden','true');
+  lbImg.src = '';
+}
+function updateCounter(){
+  lbCounter.textContent = (index+1) + ' / ' + links.length;
+}
+function next(){ index = (index+1) % links.length; openLB(index); }
+function prev(){ index = (index-1 + links.length) % links.length; openLB(index); }
+function preloadNeighbors(){
+  [ (index+1)%links.length, (index-1+links.length)%links.length ].forEach(i=>{
+    const src = links[i].getAttribute('href');
+    const img = new Image(); img.src = src;
+  });
+}
+
+/* Click on any card */
+links.forEach((a,i)=>{
+  a.addEventListener('click', (e)=>{
+    e.preventDefault();
+    openLB(i);
+  });
+});
+
+/* Buttons */
+btnNext.addEventListener('click', e=>{ e.stopPropagation(); next(); });
+btnPrev.addEventListener('click', e=>{ e.stopPropagation(); prev(); });
+btnClose.addEventListener('click', e=>{ e.stopPropagation(); closeLB(); });
+
+/* Download current image (optional; saves the file opened in lightbox) */
+btnDl.addEventListener('click', e=>{
+  e.stopPropagation();
+  const a = document.createElement('a');
+  a.href = links[index].getAttribute('href');
+  a.download = 'memory.jpg';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+});
+
+/* Close when clicking outside image */
+lb.addEventListener('click', (e)=>{
+  if(e.target === lb) closeLB();
+});
+
+/* Keyboard navigation */
+window.addEventListener('keydown', (e)=>{
+  if(!lb.classList.contains('open')) return;
+  if(e.key === 'ArrowRight') next();
+  else if(e.key === 'ArrowLeft') prev();
+  else if(e.key === 'Escape') closeLB();
+});
+
+/* Touch swipe (mobile) */
+(function enableSwipe(){
+  let x0=null, y0=null;
+  lb.addEventListener('touchstart', (e)=>{
+    if(!lb.classList.contains('open')) return;
+    const t=e.changedTouches[0]; x0=t.clientX; y0=t.clientY;
+  }, {passive:true});
+  lb.addEventListener('touchend', (e)=>{
+    if(x0===null) return;
+    const t=e.changedTouches[0];
+    const dx=t.clientX-x0, dy=t.clientY-y0;
+    const ax=Math.abs(dx), ay=Math.abs(dy);
+    if(Math.max(ax,ay)>30){  // simple threshold
+      if(ax>ay){ dx>0 ? prev() : next(); }
+      else if(dy>0){ closeLB(); } // swipe down to close
+    }
+    x0=y0=null;
+  }, {passive:true});
+})();
+
+/* ---------- Back to top ---------- */
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY>500) toTop.classList.add('show');
+  else toTop.classList.remove('show');
+});
+toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+</body>
+</html>

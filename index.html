@@ -1,0 +1,194 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bismillah 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0, #f48fb1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cake-container {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 350px;
+      z-index: 1;
+    }
+
+    .cake {
+      width: 100%; height: 100%;
+      background: linear-gradient(45deg, #ffe0b2, #ffcc80);
+      border-radius: 20px 20px 50px 50px;
+      position: relative;
+      animation: cakeGlow 2s infinite alternate;
+    }
+
+    .cake::before {
+      content: '';
+      position: absolute;
+      top: -30px; left: 30px; right: 30px;
+      height: 60px;
+      background: linear-gradient(45deg, #ce93d8, #ba68c8);
+      border-radius: 15px;
+    }
+
+    .cake::after {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 30px; height: 60px;
+      background: #8e24aa;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .cherry {
+      position: absolute;
+      top: -70px; left: 50%;
+      transform: translateX(-50%);
+      width: 35px; height: 35px;
+      background: #c2185b;
+      border-radius: 50%;
+    }
+
+    .cherry::after {
+      content: '';
+      position: absolute;
+      top: -8px; left: 10px;
+      width: 12px; height: 20px;
+      background: #2e7d32;
+      border-radius: 8px;
+      transform: rotate(45deg);
+    }
+
+    @keyframes cakeGlow {
+      from { filter: drop-shadow(0 0 10px rgba(255,105,180,0.3)); }
+      to { filter: drop-shadow(0 0 25px rgba(255,105,180,0.6)); }
+    }
+
+    #login-form {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 360px;
+      text-align: center;
+      padding: 35px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(25px);
+      border-radius: 25px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      z-index: 2;
+    }
+
+    h2 {
+      font-family: 'Reem Kufi', sans-serif;
+      font-size: 28px;
+      color: #4a148c;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 16px 0;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 30px;
+      text-align: center;
+      font-size: 16px;
+      background: rgba(255,255,255,0.2);
+      color: black;
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,0.8);
+    }
+
+    button {
+      padding: 14px 30px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(to right, #8e24aa, #d81b60);
+      color: white;
+      font-size: 17px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .sprinkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      animation: float 3s infinite ease-in-out;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-100px); opacity: 0.6; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cake-container">
+    <div class="cake"></div>
+    <div class="cherry"></div>
+  </div>
+
+  <form id="login-form">
+    <h2>Bismillah ❤️</h2>
+    <input type="text" id="love-name" placeholder="Enter your name...">
+    <button id="submit-btn">Enter</button>
+  </form>
+
+  <script>
+    document.getElementById('submit-btn').addEventListener('click', function(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('love-name').value.trim().toLowerCase();
+      if (nameInput === "nadira") {
+        alert("Assalamu Alaikum, Nadi❤️");
+        window.location.href = "main.html";
+      } else {
+        alert("This space is made for Nadira ✨");
+      }
+    });
+
+    function createSprinkle() {
+      const sprinkle = document.createElement("div");
+      sprinkle.classList.add("sprinkle");
+      sprinkle.style.left = Math.random() * 100 + "vw";
+      sprinkle.style.background = `hsl(${Math.random() * 360}, 90%, 70%)`;
+      sprinkle.style.animationDuration = Math.random() * 2 + 3 + "s";
+      document.body.appendChild(sprinkle);
+
+      setTimeout(() => sprinkle.remove(), 5000);
+    }
+
+    setInterval(createSprinkle, 300);
+  </script>
+
+</body>
+</html>
