@@ -359,6 +359,27 @@ body{
       font-weight: 600;
     }
 
+   .desc-box {
+  font-size: 1.1em;
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  line-height: 1.7em;
+}
+
+/* 📱 Mobile responsive */
+@media (max-width: 600px) {
+  .desc-box {
+    font-size: 1em;        /* small text for mobile */
+    max-width: 90%;        /* take 90% of screen */
+    padding: 15px;         /* reduce padding */
+  }
+}
+
     /* Overlay fullscreen */
     .overlay {
       position: fixed;
@@ -687,3 +708,4 @@ toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})
 </script>
 </body>
 </html>
+
