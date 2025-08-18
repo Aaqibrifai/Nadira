@@ -98,7 +98,7 @@ body{
 .card::after{
   content:"❤"; position:absolute; inset:auto 0 10px 0;
   margin:auto; width:48px; height:48px; line-height:48px; text-align:center;
-  font-size:22px; color:#fff; background:rgba(0,0,0,.35);
+  font-size:22px; color:red; background:rgba(0,0,0,.35);
   border-radius:50%; backdrop-filter:blur(4px);
   opacity:.9; transform:translateY(6px); transition:opacity .2s, transform .2s;
 }
@@ -277,6 +277,162 @@ body{
   </div>
 </section>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Screenshot ✨</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet');
+
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+   body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,'Segoe UI Emoji',sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  overflow-x:hidden;
+  text-align: center;
+}
+
+    /* Title with glow */
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5em;
+      color: #c2185b;
+      text-shadow: 0 0 15px rgba(255, 192, 203, 0.7);
+      margin-bottom: 25px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff9aa2; }
+      to { text-shadow: 0 0 20px #f06292; }
+    }
+
+
+    /* Screenshot small blurred */
+    .screenshot {
+      max-width: 240px;
+      width: 100%;
+      height: 50%;
+      border-radius: 15px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+      margin: 20px 0;
+      cursor: pointer;
+      filter: blur(5px);
+      transition: transform 0.3s;
+    }
+
+    .screenshot:hover {
+      transform: scale(1.05);
+    }
+
+    /* Description box like your other page */
+    .desc-box {
+      font-size: 1.2em;
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(5px);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      line-height: 1.7em;
+    }
+
+    .desc-box strong {
+      color: black;
+      font-weight: 600;
+    }
+
+    /* Overlay fullscreen */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      backdrop-filter: blur(8px);
+      padding: 20px;
+    }
+
+    .overlay img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+      animation: zoomIn 0.4s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+  <h1>This Call I’ll Never Forget ❤️</h1>
+
+  <!-- Screenshot -->
+  <img src="https://i.ibb.co/VWppxbFW/image.png" 
+       alt="Special Screenshot" 
+       class="screenshot" 
+       onclick="openOverlay(this)">
+
+  <!-- Description box -->
+  <div class="desc-box">
+    <p>
+      How could I ever <strong>forget this call</strong>? 🥹  
+      It was our <strong>first Long conversation</strong>, and I felt so <strong>happy</strong>… <br><br>
+      You were talking, then you even <strong>sang a song</strong>…  
+      I still remember it <strong>so vividly</strong>… <br><br>
+      This is truly a <strong>moment in my life that I’ll never forget</strong>. ❤️
+    </p>
+  </div>
+
+  <!-- Overlay fullscreen -->
+  <div class="overlay" id="overlay">
+    <span class="close-btn" onclick="closeOverlay()">&times;</span>
+    <img id="fullImg" src="">
+  </div>
+
+  <script>
+    function openOverlay(img) {
+      document.getElementById("overlay").style.display = "flex";
+      document.getElementById("fullImg").src = img.src;
+    }
+
+    function closeOverlay() {
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
 <!-- Popup (namespaced IDs) -->
 <div class="letters-popup" id="lettersPopup">
   <button class="letters-close" id="lettersClose" aria-label="Close">&times;</button>
@@ -392,12 +548,11 @@ body{
     if (e.key === 'Escape')     closePopup();
   });
 })();
+
 </script>
 
 
 <button id="toTop" class="to-top" aria-label="Back to top">↑</button>
-
-<p class="footer-note">InshaAllah, all these memories will only grow. 🤍</p>
 
 <script>
 /* ---------- Floating hearts generator ---------- */
