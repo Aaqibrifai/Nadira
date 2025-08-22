@@ -286,8 +286,11 @@ body{
   </div>
 </section>
 
-<!DOCTYPE html>
-<html lang="en">
+
+
+<!-- Our first long conversation call -->
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -314,7 +317,7 @@ body{
       font-size: 3.5em;
       color: #c2185b;
       text-shadow: 0 0 15px rgba(255, 192, 203, 0.7);
-       margin: 120px 0 25px 0;
+      margin: 120px 0 25px 0;
       animation: glow 2s ease-in-out infinite alternate;
     }
 
@@ -359,7 +362,7 @@ body{
       font-weight: 600;
     }
 
-   .desc-box {
+.desc-box {
   font-size: 1.1em;
   max-width: 800px;
   margin: 0 auto;
@@ -379,6 +382,8 @@ body{
     padding: 15px;         /* reduce padding */
   }
 }
+
+
 
     /* Overlay fullscreen */
     .overlay {
@@ -457,7 +462,153 @@ body{
     }
   </script>
 </body>
-</html>
+
+
+
+
+<!-- 🌸 Ghibli Section (independent) -->
+<section class="ghibli-section">
+  <h1>This is You & Me ❤️</h1>
+
+  <!-- Ghibli Style Photo (card style + blur) -->
+  <a class="card" href="https://i.ibb.co/MxTs23w9/image.png" onclick="openOverlayGhibli(event, this)">
+    <img class="thumb" loading="lazy" 
+         src="https://i.ibb.co/MxTs23w9/image.png" 
+         alt="Ghibli Style Photo">
+  </a>
+
+  <!-- Ghibli Description box -->
+  <div class="ghibli-desc">
+    <p>
+      Till now, we never had a chance to take a <strong>photo together</strong>...  
+      but deep inside, I always wished for at least one moment to capture <strong>with you</strong>.  
+      Unfortunately, it never happened... so I used <strong>ChatGPT</strong> to create something that feels like we are together.  
+      And <strong>InshaAllah</strong>, one day we’ll capture a <strong>real moment</strong> just like this. 🤍
+    </p>
+  </div>
+</section>
+
+<!-- 🌸 Independent Overlay for Ghibli section -->
+<div class="overlay-ghibli" id="overlay-ghibli">
+  <span class="close-btn" onclick="closeOverlayGhibli()">&times;</span>
+  <img id="fullImg-ghibli" src="">
+</div>
+
+<style>
+  .ghibli-section {
+    text-align: center;
+    margin: 50px 0;
+  }
+
+  /* Card with blur effect */
+  .ghibli-section .card {
+    display: inline-block;
+    text-decoration: none;
+    overflow: hidden; /* prevent white gaps from image edges */
+    border-radius: 20px;
+  }
+
+  .ghibli-section .card img.thumb {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    aspect-ratio: 3/4;          /* keeps nice proportion */
+    object-fit: cover;          /* crop & cover fully */
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    filter: blur(7px);          /* always blurred */
+    transition: transform 0.3s ease; 
+    cursor: pointer;
+    display: block;
+  }
+
+  /* hover la blur remove pannaama only zoom varum */
+  .ghibli-section .card img.thumb:hover {
+    transform: scale(1.05);
+  }
+
+  /* Description scoped */
+  .ghibli-section .ghibli-desc {
+    font-size: 1.1em;
+    max-width: 700px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    border-radius: 18px;
+    line-height: 1.6em;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .ghibli-section .ghibli-desc strong {
+    color: #111;
+  }
+
+  /* Overlay specific for Ghibli */
+  .overlay-ghibli {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+  }
+
+  .overlay-ghibli img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    object-fit: contain; /* keep full image inside overlay */
+  }
+
+  .overlay-ghibli .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+  }
+
+  /* 📱 Mobile responsive tweaks */
+  @media (max-width: 600px) {
+    .ghibli-section h1 {
+      font-size: 1.8em;
+    }
+    .ghibli-section .card img.thumb {
+      max-width: 90%;
+      filter: blur(3px);  /* still blurred in mobile */
+    }
+    .ghibli-section .ghibli-desc {
+      font-size: 1em;
+      padding: 15px;
+    }
+  }
+</style>
+
+
+
+<script>
+  function openOverlayGhibli(event, el) {
+    event.preventDefault(); 
+    document.getElementById("overlay-ghibli").style.display = "flex";
+    document.getElementById("fullImg-ghibli").src = el.querySelector("img").src;
+  }
+
+  function closeOverlayGhibli() {
+    document.getElementById("overlay-ghibli").style.display = "none";
+  }
+</script>
+
+
 
 
 
@@ -708,6 +859,3 @@ toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})
 </script>
 </body>
 </html>
-
-
-
