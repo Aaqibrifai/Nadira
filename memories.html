@@ -506,15 +506,16 @@ body{
     text-decoration: none;
     overflow: hidden;
     border-radius: 20px;
+    width: 100%;
+    max-width: 320px; /* control desktop size */
   }
 
   .ghibli-section .card img.thumb {
     width: 100%;
-    max-width: 300px;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    filter: blur(7px);
+    filter: blur(5px);
     transition: transform 0.3s ease;
     cursor: pointer;
     display: block;
@@ -525,7 +526,7 @@ body{
     transform: scale(1.05);
   }
 
-  /* Description scoped */
+  /* Description */
   .ghibli-section .ghibli-desc {
     font-size: 1.1em;
     max-width: 700px;
@@ -542,7 +543,7 @@ body{
     color: #111;
   }
 
-  /* Overlay specific for Ghibli */
+  /* Overlay */
   .overlay-ghibli {
     position: fixed;
     top: 0; left: 0;
@@ -576,23 +577,28 @@ body{
     text-shadow: 0 0 10px rgba(0,0,0,0.7);
   }
 
-  /* 📱 Mobile responsive tweaks */
+  /* 📱 Mobile responsive */
   @media (max-width: 600px) {
-    .ghibli-section h1 {
-      font-size: 1.8em;
+    .ghibli-section .card {
+      max-width: 100%;   /* take full width on small screens */
+      border-radius: 15px;
     }
+
     .ghibli-section .card img.thumb {
-      max-width: 90%;
+      width: 100%;
       height: auto;
       filter: blur(3px);
       object-fit: cover;
     }
+
     .ghibli-section .ghibli-desc {
       font-size: 1em;
       padding: 15px;
+      margin: 15px;
     }
   }
 </style>
+
 
 
 
@@ -860,6 +866,3 @@ toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})
 </script>
 </body>
 </html>
-
-
-
