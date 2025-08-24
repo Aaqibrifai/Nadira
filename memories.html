@@ -500,26 +500,29 @@ body{
     margin: 50px 0;
   }
 
-  /* Card with blur effect */
+  /* Card with blur effect (same as screenshot size) */
   .ghibli-section .card {
     display: inline-block;
     text-decoration: none;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 15px;
     width: 100%;
-    max-width: 320px; /* control desktop size */
+    max-width: 240px;   /* ✅ same as .screenshot */
+    height: auto;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+    background: #eee;
+    margin: 20px 0;
   }
 
   .ghibli-section .card img.thumb {
     width: 100%;
     height: auto;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    object-fit: cover;
+    border-radius: 15px;
     filter: blur(5px);
     transition: transform 0.3s ease;
     cursor: pointer;
     display: block;
-    object-fit: cover;
   }
 
   .ghibli-section .card img.thumb:hover {
@@ -528,19 +531,20 @@ body{
 
   /* Description */
   .ghibli-section .ghibli-desc {
-    font-size: 1.1em;
-    max-width: 700px;
-    margin: 20px auto;
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(6px);
-    padding: 20px;
-    border-radius: 18px;
-    line-height: 1.6em;
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 25px;
+    border-radius: 20px;
+    line-height: 1.7em;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   }
 
   .ghibli-section .ghibli-desc strong {
-    color: #111;
+    color: black;
+    font-weight: 600;
   }
 
   /* Overlay */
@@ -580,16 +584,13 @@ body{
   /* 📱 Mobile responsive */
   @media (max-width: 600px) {
     .ghibli-section .card {
-      max-width: 90%;   /* take full width on small screens */
-      margin: auto;
-      border-radius: 15px;
+      max-width: 90%;
+      border-radius: 12px;
     }
 
     .ghibli-section .card img.thumb {
-      width: 100%;
-      height: auto;
       filter: blur(3px);
-      object-fit: cover;
+      border-radius: 12px;
     }
 
     .ghibli-section .ghibli-desc {
@@ -599,6 +600,7 @@ body{
     }
   }
 </style>
+
 
 
 
@@ -867,4 +869,5 @@ toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})
 </script>
 </body>
 </html>
+
 
