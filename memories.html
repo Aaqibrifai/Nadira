@@ -530,18 +530,17 @@ body{
   }
 
   /* Description */
-.ghibli-section .ghibli-desc {
-  font-size: 1.2em;
-  max-width: 800px;
-  margin: 0 auto 60px auto; /* ⬅️ Bottom gap added */
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(5px);
-  padding: 25px;
-  border-radius: 20px;
-  line-height: 1.7em;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
+  .ghibli-section .ghibli-desc {
+    font-size: 1.2em;
+    max-width: 800px;
+    margin: 0 auto 60px auto; /* ⬅️ Bottom gap added */
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    padding: 25px;
+    border-radius: 20px;
+    line-height: 1.7em;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
 
   .ghibli-section .ghibli-desc strong {
     color: black;
@@ -585,7 +584,8 @@ body{
   /* 📱 Mobile responsive */
   @media (max-width: 600px) {
     .ghibli-section .card {
-      max-width: 90%;
+      max-width: 240px;   /* ✅ same kutty size as laptop */
+      margin: auto;
       border-radius: 12px;
     }
 
@@ -597,10 +597,11 @@ body{
     .ghibli-section .ghibli-desc {
       font-size: 1em;
       padding: 15px;
-      margin: 15px;
+      margin: 15px auto 60px auto; /* bottom gap keep */
     }
   }
 </style>
+
 
 
 
