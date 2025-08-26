@@ -689,6 +689,36 @@ body{
     overflow: hidden;
   }
 
+  /* Floating hearts background layer */
+  .hearts-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 1; /* behind text */
+  }
+
+  .emoji-heart {
+    position: absolute;
+    bottom: -30px;
+    font-size: 24px;
+    opacity: 0.8;
+    animation: floatUp 8s linear infinite;
+  }
+
+  /* Different positions + speed */
+  .emoji-heart:nth-child(1) { left: 10%; animation-duration: 6s; }
+  .emoji-heart:nth-child(2) { left: 25%; animation-duration: 7s; }
+  .emoji-heart:nth-child(3) { left: 50%; animation-duration: 5.5s; }
+  .emoji-heart:nth-child(4) { left: 75%; animation-duration: 8s; }
+  .emoji-heart:nth-child(5) { left: 90%; animation-duration: 6.5s; }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+  }
+
+  /* Foreground text content */
   .final-wish h2 {
     font-family: "Great Vibes", cursive;
     font-size: 3em;
@@ -696,6 +726,8 @@ body{
     margin-bottom: 20px;
     text-shadow: 0 0 15px #fff, 0 0 25px #ff4d6d;
     animation: glow 2s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 2; /* above hearts */
   }
 
   .final-wish p {
@@ -703,11 +735,13 @@ body{
     line-height: 1.8em;
     max-width: 700px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.25);
     padding: 25px;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     animation: fadeInUp 2s ease forwards;
+    position: relative;
+    z-index: 2; /* above hearts */
   }
 
   .final-wish strong {
@@ -715,7 +749,6 @@ body{
     font-weight: bold;
   }
 
-  /* Animations */
   @keyframes glow {
     from { text-shadow: 0 0 10px #ff9aa2; }
     to { text-shadow: 0 0 25px #ff4d6d; }
@@ -726,31 +759,19 @@ body{
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Floating emoji hearts */
-  .emoji-heart {
-    position: absolute;
-    bottom: -30px;
-    font-size: 24px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.8;
-  }
-
-  @keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-  }
-
   .final-blink {
-      font-size: 1.4em;
-      color: #d81b60;
-      margin-top: 40px;
-      animation: blink 1.2s infinite;
-    }
+    font-size: 1.4em;
+    color: #d81b60;
+    margin-top: 40px;
+    animation: blink 1.2s infinite;
+    position: relative;
+    z-index: 2; /* above hearts */
+  }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
-    }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
 </style>
 
 <script>
@@ -1018,3 +1039,4 @@ toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})
 </script>
 </body>
 </html>
+
