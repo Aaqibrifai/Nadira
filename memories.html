@@ -292,9 +292,9 @@ body{
     <figure class="polaroid"><img src="https://i.ibb.co/wFYByJFs/image.png" alt="Note 16" class="note-img" /></figure>
     <figure class="polaroid"><img src="https://i.ibb.co/wFkvzLm5/image.png" alt="Note 17" class="note-img" /></figure>
     <figure class="polaroid"><img src="https://i.ibb.co/Nn2mY9hw/image.png" alt="Note 18" class="note-img" /></figure>
-    <figure class="polaroid"><img src="https://i.ibb.co/qFn9B4W3/image.png" alt="Note 18" class="note-img" /></figure>
-    <figure class="polaroid"><img src="https://i.ibb.co/VWz3h1ym/image.png" alt="Note 18" class="note-img" /></figure>
-    <figure class="polaroid"><img src="https://i.ibb.co/5gYSDvfq/image.png" alt="Note 18" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/qFn9B4W3/image.png" alt="Note 19" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/VWz3h1ym/image.png" alt="Note 20" class="note-img" /></figure>
+    <figure class="polaroid"><img src="https://i.ibb.co/5gYSDvfq/image.png" alt="Note 21" class="note-img" /></figure>
     <figure class="polaroid"><img src="https://i.ibb.co/Q7xGJ3Qg/image.png" alt="Note 22" class="note-img" /></figure>
     
   </div>
@@ -437,6 +437,9 @@ body{
       font-weight: bold;
       text-shadow: 0 0 10px rgba(0,0,0,0.7);
     }
+
+    
+
   </style>
 </head>
 <body>
@@ -494,11 +497,12 @@ body{
   <!-- Ghibli Description box -->
   <div class="ghibli-desc">
     <p>
-      Till now, we never had a chance to take a <strong>photo together</strong>...  
-      but deep inside, I always wished for at least one moment to capture <strong>with you</strong>.  
-      Unfortunately, it never happened... so I used <strong>ChatGPT</strong> to create something that feels like we are together.  
-      And <strong>InshaAllah</strong>, one day we’ll capture a <strong>real moment</strong> just like this. 🤍
-    </p>
+  Till now, we never had a chance to take a <strong>photo together</strong> 🥹🤍...  
+  but deep inside, I always wished for at least one moment to capture <strong>with you</strong> ❤️.  
+  Unfortunately, it never happened... so I used <strong>ChatGPT</strong> ✨💖 to create something that feels like we are together 🥰.  
+  And <strong>InshaAllah</strong>, one day we’ll capture a <strong>real moment</strong> just like this 🤍😊.
+</p>
+
   </div>
 </section>
 
@@ -509,6 +513,7 @@ body{
 </div>
 
 <style>
+
   .ghibli-section {
     text-align: center;
     margin: 50px 0;
@@ -542,19 +547,30 @@ body{
   .ghibli-section .card img.thumb:hover {
     transform: scale(1.05);
   }
+/* Description */
+.ghibli-section .ghibli-desc {
+  font-size: 1.2em;
+  max-width: 800px;
+  margin: 0 auto 40px auto;   /* ⬅️ bottom space added */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  padding: 25px;
+  border-radius: 20px;
+  line-height: 1.7em;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
 
-  /* Description */
+/* 📱 Mobile Responsive Fix */
+@media (max-width: 600px) {
   .ghibli-section .ghibli-desc {
-    font-size: 1.2em;
-    max-width: 800px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(5px);
-    padding: 25px;
-    border-radius: 20px;
-    line-height: 1.7em;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-size: 1em;        
+    max-width: 95%;        
+    padding: 15px;         
+    line-height: 1.5em;    
+    margin: 0 auto 25px auto;  /* ⬅️ smaller bottom space for mobile */
   }
+}
+
 
   .ghibli-section .ghibli-desc strong {
     color: black;
@@ -896,4 +912,3 @@ toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'})
 </script>
 </body>
 </html>
-
